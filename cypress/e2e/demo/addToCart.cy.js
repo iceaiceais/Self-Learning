@@ -32,20 +32,22 @@ describe('add cart using POM', ()=>{
         
     })
 
-    it('add shoes to cart with commands', ()=>{
+    it.only('add shoes to cart with commands', ()=>{
         cy.visit('https://demo.nopcommerce.com/')
-        cy.AddShoesToCart(8)
+        cy.AddShoesToCart()
         cy.AddedCart()
         
     })
 
-    it.only('add camera to cart with POM', ()=>{
+    it('add camera to cart with POM', ()=>{
         cy.visit('https://demo.nopcommerce.com/')
         ProductPage.getElectronic()
         subItemElectronic.Camera()
         cameraSubItem.Leica()
         cameraSubItem.LeicaAddCart()
         cy.AddedCart()
+        cy.get('.close').click()
+        cy.get('.bar-notification success').should('not.be.visible')
     })
     
     //bikin flow pake aftereach ke shoping cart atau before each ke homepage 

@@ -28,16 +28,18 @@ Cypress.Commands.add("AddedCart",()=> {
     cy.get('.bar-notification').should('have.text', 'The product has been added to your shopping cart')
 })
 
-Cypress.Commands.add("AddShoesToCart",(sizeAdidas)=>{
+Cypress.Commands.add("AddShoesToCart",()=>{
 
     cy.get(':nth-child(2) > .category-item > .title > a').click()
     cy.get(':nth-child(1) >.sub-category-item >.picture >a').click()
-    cy.get('#product_attribute_9').select(sizeAdidas)
-    cy.get('[data-attr-value="25"] > label > .attribute-square-container > .attribute-square').select()
+    cy.get('[data-productid=25] > .picture > a').click()
+    cy.get('#product_attribute_9').select(1).should('have.value', '21')
+    cy.get('[data-attr-value="25"] > label > .attribute-square-container > .attribute-square').click()
     cy.get('#add-to-cart-button-25').click()
 })
 
 Cypress.Commands.add("CheckoutCart", ()=>{
+    cy.get('.cart-label').click()
     cy.get('total-info').should('contain.text', 'Sub-Total', 'Shipping', 'Tax', 'Total:')
     cy.get('#termsofservice').check().should('be.checked')
     cy.get('#checkout').click()
@@ -46,5 +48,7 @@ Cypress.Commands.add("CheckoutCart", ()=>{
         cy.get('Password').type(data.password1)
         cy.get('.buttons > [type=submit] ').click()
     })
-    
+    cy.get('total-info').should('contain.text', 'You will earn:')
+    cy.get('#termsofservice').check().should('be.checked')
+    cy.get('#checkout').click()
 })

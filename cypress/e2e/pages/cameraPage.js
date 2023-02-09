@@ -12,7 +12,7 @@ class cameraSubItem {
     static nikonAddCart2 (){
         cy.get('#add-to-cart-button-14').click
     }
-    
+
     static LeicaCart1 (){
         cy.get(':nth-child(3) > .product-item > .details > .add-info > .buttons > .product-box-add-to-cart-button').click
     }
